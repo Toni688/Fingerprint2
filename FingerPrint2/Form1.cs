@@ -102,6 +102,7 @@ namespace FingerPrint2
             //Font Constants:
             String FONT = "C:/Users/Toni/Desktop/Fingerprint_Test/FreeSans.ttf"; //"src/main/resources/fonts/FreeSans.ttf";
             String HCRBATANG = "C:/Users/Toni/Desktop/Fingerprint_Test/HANBatang.ttf"; //"src/main/resources/fonts/HANBatang.ttf";
+            String NAZANIN = "C:/Users/Toni/Desktop/Fingerprint_Test/B Nazanin.ttf"; //"src/main/resources/fonts/HANBatang.ttf";
 
             //Add to Document:
             PdfFont font1250 = PdfFontFactory.CreateFont(FONT, PdfEncodings.CP1250, true);
@@ -110,10 +111,14 @@ namespace FingerPrint2
             PdfFont font1251 = PdfFontFactory.CreateFont(FONT, "Cp1251", true);
             document.Add(new Paragraph().SetFont(font1251)
             .Add(RUSSIAN).Add(" by Robert Louis Stevenson"));
-            PdfFont fontUnicode =
-            PdfFontFactory.CreateFont(HCRBATANG, PdfEncodings.IDENTITY_H, true);
+            PdfFont fontUnicode = PdfFontFactory.CreateFont(HCRBATANG, PdfEncodings.IDENTITY_H, true);
             document.Add(new Paragraph().SetFont(fontUnicode)
             .Add(KOREAN).Add(" by Robert Louis Stevenson"));
+
+            PdfFont fontUnicodeNazanin =
+            PdfFontFactory.CreateFont(NAZANIN, PdfEncodings.IDENTITY_H, true);
+            document.Add(new Paragraph().SetFont(fontUnicodeNazanin)
+            .Add("الموافق").Add(" by Ostad"));
 
             //End Russian Part
             //************************************************************************************
