@@ -17,8 +17,8 @@ using iText.IO.Image;
 using iText.IO.Font;
 using iText.Kernel.Font;
 
-using iTextSharp.text;
-using iTextSharp.text.pdf;
+//using iTextSharp.text;
+//using iTextSharp.text.pdf;
 namespace FingerPrint2
 {
 
@@ -88,7 +88,11 @@ namespace FingerPrint2
             document.Add(p);
 
             //********************************************************************************************************
-            //Some Change!!
+            //Arabic in pdf using iTextSharp in c#
+            //********************************************************************************************************
+            /*
+            //Declare a itextSharp document 
+            //Document document = new Document(PageSize.A4);
             //Create our file stream and bind the writer to the document and the stream 
             //PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(@"D:\Test.Pdf", FileMode.Create));
 
@@ -126,15 +130,16 @@ namespace FingerPrint2
             //Add the table to the document 
             document.Add(table);
 
-            PdfFont f = PdfFontFactory.createFont(FONT, PdfEncodings.IDENTITY_H);
+            //PdfFont f = PdfFontFactory.createFont(FONT, PdfEncodings.IDENTITY_H);
 
             //*********************************************************************
-            /*
+            
             //Launch the document if you have a file association set for PDF's 
-            Process AcrobatReader = new Process();
-            AcrobatReader.StartInfo.FileName = @"D:\Test.Pdf";
-            AcrobatReader.Start();
+            //Process AcrobatReader = new Process();
+            //AcrobatReader.StartInfo.FileName = @"D:\Test.Pdf";
+            //AcrobatReader.Start();
             */
+
 
             document.Close();
         }
