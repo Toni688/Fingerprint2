@@ -82,6 +82,45 @@ namespace FingerPrint2
             var pdf = new PdfDocument(writer);
             var document = new Document(pdf);
             document.Add(new Paragraph("Hello World!"));
+                
+            //************************************************************************************
+            //Russian Part:
+
+            //Text Constants:
+            String CZECH =
+            "Podivn\u00fd p\u0159\u00edpad Dr. Jekylla a pana Hyda";
+            String RUSSIAN =
+            "\u0421\u0442\u0440\u0430\u043d\u043d\u0430\u044f "
+            + "\u0438\u0441\u0442\u043e\u0440\u0438\u044f "
+            + "\u0434\u043e\u043a\u0442\u043e\u0440\u0430 "
+            + "\u0414\u0436\u0435\u043a\u0438\u043b\u0430 \u0438 "
+            + "\u043c\u0438\u0441\u0442\u0435\u0440\u0430 "
+            + "\u0425\u0430\u0439\u0434\u0430";
+            String KOREAN =
+            "\ud558\uc774\ub4dc, \uc9c0\ud0ac, \ub098";
+
+            //Font Constants:
+            String FONT = "C:/Users/Toni/Desktop/Fingerprint_Test/FreeSans.ttf"; //"src/main/resources/fonts/FreeSans.ttf";
+            String HCRBATANG = "C:/Users/Toni/Desktop/Fingerprint_Test/HANBatang.ttf"; //"src/main/resources/fonts/HANBatang.ttf";
+
+            //Add to Document:
+            PdfFont font1250 = PdfFontFactory.CreateFont(FONT, PdfEncodings.CP1250, true);
+            document.Add(new Paragraph().SetFont(font1250)
+            .Add(CZECH).Add(" by Robert Louis Stevenson"));
+            PdfFont font1251 = PdfFontFactory.CreateFont(FONT, "Cp1251", true);
+            document.Add(new Paragraph().SetFont(font1251)
+            .Add(RUSSIAN).Add(" by Robert Louis Stevenson"));
+            PdfFont fontUnicode =
+            PdfFontFactory.CreateFont(HCRBATANG, PdfEncodings.IDENTITY_H, true);
+            document.Add(new Paragraph().SetFont(fontUnicode)
+            .Add(KOREAN).Add(" by Robert Louis Stevenson"));
+
+            //End Russian Part
+            //************************************************************************************
+
+
+
+
             document.Add(new Paragraph(lines[1]));
             Paragraph p = new Paragraph("Right Index").Add(rightIndex).Add("Left Index").Add(leftIndex);
             // Add Paragraph to document
