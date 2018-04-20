@@ -64,12 +64,20 @@
       <HintPath>..\packages\itext7.7.1.1\lib\net40\itext.layout.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="itext.licensekey, Version=3.0.1.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.licensekey.3.0.1.1\lib\net40\itext.licensekey.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="itext.pdfa, Version=7.1.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\itext7.7.1.1\lib\net40\itext.pdfa.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="itext.sign, Version=7.1.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\itext7.7.1.1\lib\net40\itext.sign.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itext.typography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.pdfcalligraph.2.0.0\lib\net40\itext.typography.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">

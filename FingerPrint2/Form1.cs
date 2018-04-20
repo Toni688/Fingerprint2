@@ -19,6 +19,10 @@ using iText.Kernel.Font;
 
 //using iTextSharp.text;
 //using iTextSharp.text.pdf;
+
+using iText.Layout.Properties;
+using iText.License;
+
 namespace FingerPrint2
 {
 
@@ -39,6 +43,8 @@ namespace FingerPrint2
 
         private void button1_Click(object sender, EventArgs e)
         {
+            LicenseKey.LoadLicenseFile ("C:/Users/Toni/Desktop/Fingerprint_Test/itextkey1524180183686_0.xml");
+
             iText.Layout.Element.Image leftIndex = new iText.Layout.Element.Image(ImageDataFactory.Create(LeftIndex));
             iText.Layout.Element.Image rightIndex = new iText.Layout.Element.Image(ImageDataFactory.Create(RightIndex));
             
@@ -102,7 +108,7 @@ namespace FingerPrint2
             //Font Constants:
             String FONT = "C:/Users/Toni/Desktop/Fingerprint_Test/FreeSans.ttf"; //"src/main/resources/fonts/FreeSans.ttf";
             String HCRBATANG = "C:/Users/Toni/Desktop/Fingerprint_Test/HANBatang.ttf"; //"src/main/resources/fonts/HANBatang.ttf";
-            String NAZANIN = "C:/Users/Toni/Desktop/Fingerprint_Test/B Nazanin.ttf"; //"src/main/resources/fonts/HANBatang.ttf";
+            //String NAZANIN = "C:/Users/Toni/Desktop/Fingerprint_Test/B Nazanin.ttf"; //"src/main/resources/fonts/HANBatang.ttf";
 
             //Add to Document:
             PdfFont font1250 = PdfFontFactory.CreateFont(FONT, PdfEncodings.CP1250, true);
@@ -115,16 +121,113 @@ namespace FingerPrint2
             document.Add(new Paragraph().SetFont(fontUnicode)
             .Add(KOREAN).Add(" by Robert Louis Stevenson"));
 
-            PdfFont fontUnicodeNazanin =
-            PdfFontFactory.CreateFont(NAZANIN, PdfEncodings.IDENTITY_H, true);
-            document.Add(new Paragraph().SetFont(fontUnicodeNazanin)
-            .Add("الموافق").Add(" by Ostad"));
-
             //End Russian Part
             //************************************************************************************
+            
+            /*
+            //Add Arabic-Inverted
+            PdfFont fontUnicodeNazanin =
+            PdfFontFactory.CreateFont(NAZANIN, PdfEncodings.IDENTITY_H, true);
+            //document.Add(new Paragraph().SetFont(fontUnicodeNazanin)
+            //.Add("الموافق").Add(" by Ostad"));
+
+            //Add Arabic Correct (?) @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            //itext 7 Equivalent
+            //Text redText = new Text("Nos formules")
+            Text redText = new Text("الموافق")
+            .SetFont(fontUnicodeNazanin)
+            .SetFontSize(20);
+            Paragraph p2 = new Paragraph().Add(redText);
+            //document.Add(p2);
+            //document.Add(new Phrase("This is a ميسو ɸ", f));
+            */
+            
+            /*
+            //************************************************************************************
+            //Style Part:
+            Style arabic = new Style().SetTextAlignment(TextAlignment.RIGHT).SetBaseDirection(BaseDirection.RIGHT_TO_LEFT).
+                SetFontSize(20).SetFont(fontUnicodeNazanin);
+
+            //document.Add(new Paragraph("م الموافق").SetFontScript(Character.UnicodeScript.ARABIC).AddStyle(arabic));
 
 
+            //End Style Part
+            //************************************************************************************
+            */
+            
+            /*
+            var times = PdfFontFactory.CreateFont(NAZANIN, PdfEncodings.IDENTITY_H, true);
+            Style arabic2 = new Style().SetBaseDirection(BaseDirection.RIGHT_TO_LEFT);
+            Paragraph p3 = new Paragraph();
+            p3.SetFont(NAZANIN);
+            p3.AddStyle(arabic2);
+            Text t = new Text("أسبوع");
+            p3.Add(t);
+            //document.Add(p3);
+            */
 
+            //************************************************************************************
+            //Calligraph Part:
+
+            Document arabicPdf = new Document(new PdfDocument(new PdfWriter("C:/Users/Toni/Desktop/Fingerprint_Test/arabic.pdf")));
+
+            // Arabic text starts near the top right corner of the page
+            arabicPdf.SetTextAlignment(TextAlignment.RIGHT);
+
+            // create a font, and make it the default for the document
+            //PdfFont f = PdfFontFactory.CreateFont("C:/Users/Toni/Desktop/Fingerprint_Test/DroidKufi-Regular.ttf", PdfEncodings.IDENTITY_H, true);
+            //Arial -> OK
+            //Tahoma -> OK
+            //Koodak -> OK
+            //A_Nefel_Botan -> OK
+            //PdfFont f = PdfFontFactory.CreateFont("C:/Windows/Fonts/tahoma.ttf", PdfEncodings.IDENTITY_H, true);
+            PdfFont f = PdfFontFactory.CreateFont("C:/Users/Toni/Desktop/Fingerprint_Test/A_Nefel_Botan.ttf", PdfEncodings.IDENTITY_H, true);
+            //PdfFont f = PdfFontFactory.CreateFont("C:/Windows/Fonts/W_nazanin.ttf", PdfEncodings.IDENTITY_H, true);
+            arabicPdf.SetFont(f);
+
+            // add content: السلام عليكم (as-salaamu 'aleykum - peace be upon you)
+            //arabicPdf.Add(new Paragraph("أسبوع"));
+            //arabicPdf.Add(new Paragraph("هویج"));
+            arabicPdf.Add(new Paragraph(lines[1]));
+
+            arabicPdf.Close();
+
+            //End Calligraph Part
+            //************************************************************************************
+
+            /*
+            //************************************************************************************
+            //Hebrew Part:
+
+            //Use a table so that we can set the text direction 
+            Table table = new Table(1);
+            //Ensure that wrapping is on, otherwise Right to Left text will not display 
+            //table.DefaultCell.NoWrap = false;
+            table.AddStyle(arabic);
+
+            table.AddCell(new Cell().SetHorizontalAlignment(HorizontalAlignment.CENTER).Add(p2));
+ 
+
+            //Create a regex expression to detect hebrew or arabic code points 
+            const string regex_match_arabic_hebrew = @"[\u0600-\u06FF,\u0590-\u05FF]+";
+            //if (Regex.IsMatch("מה קורה", regex_match_arabic_hebrew, RegexOptions.IgnoreCase))
+            {
+                table.RunDirection = PdfWriter.RUN_DIRECTION_RTL;
+            }
+
+            //Create a cell and add text to it 
+            PdfPCell text = new PdfPCell(new Phrase("מה קורה", font));
+            //Ensure that wrapping is on, otherwise Right to Left text will not display 
+            text.NoWrap = false;
+
+            //Add the cell to the table 
+            table.AddCell(text);
+
+            //Add the table to the document 
+            document.Add(table);
+            //End Hebrew Part
+            //************************************************************************************
+            */
 
             document.Add(new Paragraph(lines[1]));
             Paragraph p = new Paragraph("Right Index").Add(rightIndex).Add("Left Index").Add(leftIndex);
